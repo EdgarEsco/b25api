@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const PORT = 3000;
 const {Post} = require("./mongooseClient");
 
 const app = express();
@@ -68,6 +67,8 @@ app.delete("/api/v1/post/:uid", (req, res) =>{
 })
 
 
-app.listen(PORT, () => {
-    console.log(`Server on port ${PORT}`);
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, ()=>{
+    console.log(`Servidor corriendo en el puerto ${PORT}`)
 })
