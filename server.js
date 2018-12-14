@@ -23,12 +23,27 @@ app.post("/api/v1/post", (req, res) => {
         post,
         titulo, 
         autor,
-        contenido        
+        contenido      
     })
 
-    nuevoPost.save((err, Post) =>{
-        err ? res.status(409).send(err) : res.status(201).send(post)
+    Post.create(nuevoPost).then((post)=>{
+        return res.status(201).json({"message":"Post Creado","id":post._id})
+    }).catch((err) => {
+        console.log(err);
+        return res.json(err)
     })
+
+    /* nuevoPost.save((err,post)=>{
+        if(err){
+            return res.status(400)
+        }else{
+            return res.status(200)
+        }
+    })
+     */
+    /*=>{
+        Post ? res.status(201).send(post) : res.status(400).send(err)
+    })*/
   
 });
 
